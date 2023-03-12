@@ -8,7 +8,7 @@ var student = {
     }
 }
 
-function loaded() {
+function load() {
 
     document.getElementById("nameField").innerHTML=student.name;
     document.getElementById("idField").innerHTML=student.id;
@@ -18,5 +18,9 @@ function loaded() {
 
 function addCourse() {
     student.takenCourses.push("CPSC 110");
-    loaded();
+    load();
+}
+
+function disableCheck() {
+    document.getElementById("courseCheckBox")
 }
