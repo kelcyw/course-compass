@@ -35,7 +35,7 @@ class Degree {
     #degreeName;
     #requirements;
 
-    Class(degreeName, requirements) {
+    constructor(degreeName, requirements) {
         this.degreeName = degreeName;
         this.requirements = requirements;
     }
@@ -48,16 +48,6 @@ class Degree {
         return this.#requirements;
     }
 }
-
-let requirements = [
-    new Course([], "CPSC", 100, 3), 
-    new Course([], "CPSC", 103, 3), 
-    new Course([new Course([], "CPSC", 103, 3)], "CPSC", 107, 3), 
-    new Course([], "CPSC", 110, 4)
-]
-
-let cs_degree = new Degree("CPSC", requirements);
-
 
 function filterCoursesByName(name) {
     let filtered = [];
@@ -76,7 +66,7 @@ function filterCoursesByName(name) {
 
 // Student Class
 class Student {
-    Class(studentName, studentID, finishedCourses, degree) {
+    constructor(studentName, studentID, finishedCourses, degree) {
         this.studentName = studentName;
         this.studentID = studentID;
         this.finishedCourses = finishedCourses;
@@ -153,6 +143,49 @@ class Student {
         return available;
     }
 }
+
+// Courses Initialization
+// first year
+let cs103 = new Course([], "CPSC", 103, 3);
+let cs107 = new Course([new Course([], "CPSC", 103, 3)], "CPSC", 107, 3);
+let cs110 = new Course([], "CPSC", 110, 4);
+let cs121 = new Course([[cs107],[cs110]], "CPSC", 121, 4);
+let cs210 = new Course([[cs107],[cs110]], "CPSC", 210, 4);
+let cs213 = new Course([[cs121],[cs210]], "CPSC", 213, 4);
+let cs221 = new Course([[cs210,cs121]]);
+let cs310 = new Course([cs213,cs221], "CPSC", 310, 4);
+let cs313 = new Course([cs213, cs221], "CPSC", 313, 3);
+let cs320 = new Course([], "CPSC", 320, 3);
+
+
+let requirements = [
+    // PATH 1: CS 103 + 107 route
+    [
+        cs103,
+        cs107,
+        cs121,
+        cs210,
+        cs213,
+        cs221,
+        cs310,
+        cs313,
+        cs320
+    ],
+    // PATH 2: CS110 route
+    [
+        cs110,
+        cs121,
+        cs210,
+        cs213,
+        cs221,
+        cs310,
+        cs313,
+        cs320
+    ]
+
+]
+
+cs_degree = new Degree("CPSC", requirements);
 
 var student = {
     name:"John", 
