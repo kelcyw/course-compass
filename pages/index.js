@@ -158,7 +158,7 @@ let cs313 = new Course([cs213, cs221], "CPSC", 313, 3);
 let cs320 = new Course([], "CPSC", 320, 3);
 
 
-let requirements = [
+let reqs = [
     // PATH 1: CS 103 + 107 route
     [
         cs103,
@@ -185,15 +185,15 @@ let requirements = [
 
 ]
 
-cs_degree = new Degree("CPSC", requirements);
+var cs_degree = new Degree("CPSC", reqs);
 
 var student = {
     name:"John", 
     id:"555666777", 
-    takenCourses:[], 
+    takenCourses:[new Course([], "CPSC", 100, 4)], 
     degree: {
         name:"B.Sc, Computer Science", 
-        requirements:[
+        requirements: [
             new Course([], "CPSC", 100, 3), 
             new Course([], "CPSC", 103, 3), 
             new Course([new Course([], "CPSC", 103, 3)], "CPSC", 107, 3), 
@@ -207,7 +207,7 @@ function loadIndex() {
     document.getElementById("nameField").innerHTML=student.name;
     document.getElementById("idField").innerHTML=student.id;
     document.getElementById("degreeField").innerHTML=student.degree.name;
-    document.getElementById("coursesField").innerHTML=student.takenCourses;  
+    printCourses();
 
 }
 
@@ -216,31 +216,62 @@ function loadCourseMap() {
 }
 
 function addCourse() {
-    student.takenCourses.push("CPSC 110");
+    student.takenCourses.push(new Course([], "CPSC", 110, 4));
     loadIndex();
 }
 
+function printCourses() {
+    document.getElementById("coursesField").innerHTML="";
+    for (var i = 0, max = student.takenCourses.length; i < max; i++) {
+        document.getElementById("coursesField").innerHTML+=(student.takenCourses[i].courseName 
+            + " " + student.takenCourses[i].courseCode + ", ");  
+    }
+}
+
 function loadMap() {
-    var reqs = student.degree.requirements;
+    var requirements = student.degree.requirements;
     
-    for (var i = 0, max = reqs.length; i < max; i++) {
+    for (var i = 0; i < requirements.length; i++) {
         var d = document.createElement('div');
         d.className = "form-check form-check-inline";
         d.id = i;
         var l = document.createElement('label');
         l.className = "form-check-label";
         l.id = i + " label";
-        l.innerHTML = reqs[i].courseName + " " + reqs[i].courseCode;
+        l.innerHTML = requirements[i].courseName + " " + requirements[i].courseCode;
         var c = document.createElement('input');
         c.className = "form-check-input";
         c.type = "checkbox";
         c.id = i + " checkbox"; 
+        c.onchange="updateCheckStates(c)";
 
         // function for comparing against taken courses here
-        for (var j = 0, max = reqs[i].prereqs.length; j < max; j++) {
-            var prereq = reqs[i].preqreqs[j]
-            if (!student.takenCourses.includes(prereq)) {
-                c.disabled = "true";  // check
+
+        for (var j = 0; j < requirements[i].prereqs.length; j++) {
+            console.log(requirements[i].prereqs.length);
+            console.log(requirements[i].prereqs);
+            var prereqs = requirements[i].prereqs;
+            var prereq = prereqs[j];
+            for (var k = 0; k < student.takenCourses.length; k++) {
+                if (student.takenCourses[k].courseName == prereq.courseName
+                    &&
+                    student.takenCourses[k].courseCode == prereq.courseCode) 
+                    {
+                    var taken = true;
+                    continue;
+                }
+            }
+            if (!taken) {
+                c.disabled = true;
+            }
+        }
+
+        for (var k = 0; k < student.takenCourses.length; k++) {
+            if (student.takenCourses[k].courseName == requirements[i].courseName
+                &&
+                student.takenCourses[k].courseCode == requirements[i].courseCode) 
+                {
+                c.checked = true;
             }
         }
 
@@ -250,11 +281,6 @@ function loadMap() {
     }
 }
 
-function updateCheckStates() {
-    // document.getElementById("courseCheckBox").disabled = !this.checked;
-    var checkboxes = document.getElementsByClass("form-check-input");
-    for (var i = 0, max = checkboxes.length; i < max; i++) {
-        // unfinished
-    }
-    
+function updateCheckStates(c) {
+    loadMap();
 }
