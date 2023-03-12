@@ -54,13 +54,8 @@ function filterCoursesByName(name) {
 
     
     cs_degree.requirements.forEach((list) => {
-<<<<<<< Updated upstream
         list.forEach((course) => {
             if (!filtered.contains(course) && course.getCourseName()) {
-=======
-        list.item.forEach((course) => {
-            if (!filtered.contains(course) && course.getCourseName) {
->>>>>>> Stashed changes
                 filtered.add(course);
             }
         })
@@ -99,8 +94,8 @@ class Student {
     }
 
     addTakenCourse(course) {
-        if (!this.finishedCourses.contains(course)) {
-            this.finishedCourses.add(course);
+        if (!this.finishedCourses.includes(course)) {
+            this.finishedCourses.push(course);
         }
     }
 
@@ -149,7 +144,6 @@ class Student {
     }
 }
 
-<<<<<<< Updated upstream
 // Courses Initialization
 // first year
 let cs103 = new Course([], "CPSC", 103, 3);
@@ -207,25 +201,13 @@ var student = {
         ]
     }
 }
-=======
-let requirements = [
-    new Course([], "CPSC", 100, 3), 
-    new Course([], "CPSC", 103, 3), 
-    new Course([new Course([], "CPSC", 103, 3)], "CPSC", 107, 3), 
-    new Course([], "CPSC", 110, 4)
-]
-
-let csDegree = new Degree("B.Sc, Computer Science", requirements);
-
-var student = new Student("John", 555666777, [], csDegree);
->>>>>>> Stashed changes
 
 function loadIndex() {
 
-    document.getElementById("nameField").innerHTML=student.getStudentName;
-    document.getElementById("idField").innerHTML=student.getStudentID;
-    document.getElementById("degreeField").innerHTML=student.getStudentDegree.getDegreeName;
-    document.getElementById("coursesField").innerHTML=student.getStudentCourses;  
+    document.getElementById("nameField").innerHTML=student.name;
+    document.getElementById("idField").innerHTML=student.id;
+    document.getElementById("degreeField").innerHTML=student.degree.name;
+    document.getElementById("coursesField").innerHTML=student.takenCourses;  
 
 }
 
@@ -233,14 +215,13 @@ function loadCourseMap() {
     loadMap();
 }
 
-
 function addCourse() {
     student.takenCourses.push("CPSC 110");
     loadIndex();
 }
 
 function loadMap() {
-    var reqs = student.getDegree.getRequirements;
+    var reqs = student.degree.requirements;
     
     for (var i = 0, max = reqs.length; i < max; i++) {
         var d = document.createElement('div');
