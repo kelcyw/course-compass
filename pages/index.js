@@ -91,7 +91,7 @@ class Student {
 
     addTakenCourse(course) {
         if (!this.finishedCourses.includes(course)) {
-            this.finishedCourses.add(course);
+            this.finishedCourses.push(course);
         }
     }
 
@@ -204,10 +204,10 @@ var student = {
 
 function loadIndex() {
 
-    document.getElementById("nameField").innerHTML=student.getStudentName;
-    document.getElementById("idField").innerHTML=student.getStudentID;
-    document.getElementById("degreeField").innerHTML=student.getStudentDegree.getDegreeName;
-    document.getElementById("coursesField").innerHTML=student.getStudentCourses;  
+    document.getElementById("nameField").innerHTML=student.name;
+    document.getElementById("idField").innerHTML=student.id;
+    document.getElementById("degreeField").innerHTML=student.degree.name;
+    document.getElementById("coursesField").innerHTML=student.takenCourses;  
 
 }
 
@@ -215,14 +215,13 @@ function loadCourseMap() {
     loadMap();
 }
 
-
 function addCourse() {
     student.takenCourses.push("CPSC 110");
     loadIndex();
 }
 
 function loadMap() {
-    var reqs = student.getDegree.getRequirements;
+    var reqs = student.degree.requirements;
     
     for (var i = 0, max = reqs.length; i < max; i++) {
         var d = document.createElement('div');
