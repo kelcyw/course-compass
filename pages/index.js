@@ -32,9 +32,6 @@ class Course {
 
 // Degree Class
 class Degree {
-    #degreeName;
-    #requirements;
-
     constructor(degreeName, requirements) {
         this.degreeName = degreeName;
         this.requirements = requirements;
@@ -52,7 +49,6 @@ class Degree {
 function filterCoursesByName(name) {
     let filtered = [];
 
-    
     cs_degree.requirements.forEach((list) => {
         list.forEach((course) => {
             if (!filtered.contains(course) && course.getCourseName()) {
@@ -255,6 +251,7 @@ function updateCheckStates() {
     for (var i = 0, max = checkboxes.length; i < max; i++) {
         // unfinished
     }
+    
 }
 
 
