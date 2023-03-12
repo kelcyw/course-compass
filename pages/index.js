@@ -146,9 +146,13 @@ let cs103 = new Course([], "CPSC", 103, 3);
 let cs107 = new Course([new Course([], "CPSC", 103, 3)], "CPSC", 107, 3);
 let cs110 = new Course([], "CPSC", 110, 4);
 let cs121 = new Course([[cs107],[cs110]], "CPSC", 121, 4);
+
+// second year
 let cs210 = new Course([[cs107],[cs110]], "CPSC", 210, 4);
 let cs213 = new Course([[cs121],[cs210]], "CPSC", 213, 4);
 let cs221 = new Course([[cs210,cs121]]);
+
+// third year
 let cs310 = new Course([cs213,cs221], "CPSC", 310, 4);
 let cs313 = new Course([cs213, cs221], "CPSC", 313, 3);
 let cs320 = new Course([], "CPSC", 320, 3);
