@@ -53,3 +53,45 @@ function updateCheckStates() {
 
     }
 }
+
+
+// Degree Class
+class Degree {
+    #degreeName;
+    #requirements;
+
+    Class(degreeName, requirements) {
+        this.degreeName = degreeName;
+        this.requirements = requirements;
+    }
+
+    get getDegreeName() {
+        return this.degreeName;
+    }
+}
+
+let requirements = [
+    new Course([], "CPSC", 100, 3), 
+    new Course([], "CPSC", 103, 3), 
+    new Course([new Course([], "CPSC", 103, 3)], "CPSC", 107, 3), 
+    new Course([], "CPSC", 110, 4)
+]
+
+let cs_degree = new Degree("CPSC", requirements);
+
+
+
+function filterCoursesByName(name) {
+    let filtered = [];
+
+    cs_degree.requirements.forEach(function (list, index) {
+        list.item.forEach(function (course, index) {
+            if (!filtered.contains(course) && course.getCourseName()) {
+                filtered.add(course);
+            }
+        })
+    });
+
+    return filtered;
+}
+
