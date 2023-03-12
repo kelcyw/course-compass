@@ -81,6 +81,8 @@ function loadMap() {
         // + requirements[i].courseCode
         // +'</label>';
 
+        // function for comparing against taken courses
+
         document.getElementById('form').appendChild(d);
         document.getElementById(i).appendChild(c);
     }
