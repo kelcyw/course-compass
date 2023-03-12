@@ -66,7 +66,11 @@ class Degree {
     }
 
     get getDegreeName() {
-        return this.degreeName;
+        return this.#degreeName;
+    }
+
+    get getRequirements() {
+        return this.#requirements;
     }
 }
 
@@ -84,8 +88,9 @@ let cs_degree = new Degree("CPSC", requirements);
 function filterCoursesByName(name) {
     let filtered = [];
 
-    cs_degree.requirements.forEach(function (list, index) {
-        list.item.forEach(function (course, index) {
+    // not sure if I implemented this correctly
+    cs_degree.requirements.forEach((list) => {
+        list.item.forEach((course) => {
             if (!filtered.contains(course) && course.getCourseName()) {
                 filtered.add(course);
             }
@@ -95,3 +100,87 @@ function filterCoursesByName(name) {
     return filtered;
 }
 
+// Student Class
+class Student {
+    #studentName;
+    #studentID;
+    #finishedCourses;
+    #degree;
+
+    Class(studentName, studentID, finishedCourses, degree) {
+        this.#studentName = studentName;
+        this.#studentID = studentID;
+        this.#finishedCourses = finishedCourses;
+        this.#degree = degree;
+    }
+
+    get getStudentName() {
+        return this.#studentName;
+    }
+
+    get getStudentID() {
+        return this.#studentID;
+    }
+
+    get getStudentCourses() {
+        return this.#finishedCourses;
+    }
+
+    get getStudentDegree() {
+        return this.#degree;
+    }
+
+    changeDegree(degree) {
+        this.#degree = degree;
+    }
+
+    addTakenCourse(course) {
+        if (!this.#finishedCourses.contains(course)) {
+            this.#finishedCourses.add(course);
+        }
+    }
+
+    removeTakenCourse(course) {
+        if (this.#finishedCourses.contains(course)) {
+            this.#finishedCourses.remove(course);
+        }
+    }
+
+    getUnfulfilledReqs() {
+        let requirements = this.#degree.getRequirements();
+        let unfulfilled = [];
+
+        requirements.forEach(function(path, index) {
+            let path_list = [];
+            path.forEach((course) => {
+                if (!this.#finishedcourses.contains(course)) {
+                    path_list.add(course);
+                }
+            })
+            a
+            unfulfilled.add(path_list);
+        })
+        return unfulfilled;
+    }
+
+    getAvailableCourses() {
+        let requirements = this.#degree.getRequirements();
+        let available = [];
+
+        requirements.forEach(function(path, index) {
+            for (var i = 0; i < path.length; i++) {
+                let course = path[i];
+
+                if (this.#finishedCourses.contains(course)) {
+                    continue;
+                }
+                this.#finishedCourses.forEach((finished) => {
+                    if (course.hasPreq(finished) && !available.contains(c)) {
+                        available.add(course);
+                    }
+                })
+            }
+        })
+        return available;
+    }
+}
