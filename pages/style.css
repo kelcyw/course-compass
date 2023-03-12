@@ -1,3 +1,20 @@
 body {
     background-color: rgb(177, 217, 203);
 }
+
+.button{
+    background-color: rgb(180, 137, 219);
+}
+
+.card{
+    margin-bottom: 30px;
+    margin-left: 30px;
+
+}
+.card-body {
+    font-size: x-large;
+}
+
+.title{
+    font-size: x-large;
+}
