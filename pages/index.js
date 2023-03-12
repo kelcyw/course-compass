@@ -1,10 +1,5 @@
 class Course {
-    prereqs;
-    courseName;
-    courseCode;
-    credits;
-
-    Class(prereqs, courseName, courseCode, credits) {
+    constructor(prereqs, courseName, courseCode, credits) {
         this.prereqs = prereqs;
         this.courseName = courseName;
         this.courseCode = courseCode;
@@ -39,7 +34,7 @@ var student = {
     name:"John", 
     id:"555666777", 
     takenCourses:[], 
-    degree:{
+    degree: {
         name:"B.Sc, Computer Science", 
         requirements:[
             new Course([], "CPSC", 100, 3), 
@@ -56,6 +51,8 @@ function load() {
     document.getElementById("idField").innerHTML=student.id;
     document.getElementById("degreeField").innerHTML=student.degree.name;
     document.getElementById("coursesField").innerHTML=student.takenCourses;  
+
+    loadMap();
 }
 
 function addCourse() {
@@ -64,15 +61,35 @@ function addCourse() {
 }
 
 function loadMap() {
-    for (var i = 0, max = student.degree.requirements.length(); i < max; i++) {
-        document.createElement();
+    var requirements = student.degree.requirements;
+    
+    for (var i = 0, max = requirements.length; i < max; i++) {
+        var d = document.createElement('div');
+        d.className = "form-check form-check-inline";
+        d.id = i;
+        var c = document.createElement('input');
+        c.className = "form-check-input";
+        c.type = "checkbox";
+        c.id = i + " checkbox"; 
+
+        c.innerHTML = '<label class="form-check-label" for="' +i+ ' checkbox">' 
+        + requirements[i].courseName + " " + requirements[i].courseCode
+        + '</label>';
+
+        // d.innerHTML = '<input class="form-check-input" type="checkbox" value="" id="courseCheckBox"><label class="form-check-label" for="flexCheckDefault">'
+        // + requirements[i].courseName + " " +
+        // + requirements[i].courseCode
+        // +'</label>';
+
+        document.getElementById('form').appendChild(d);
+        document.getElementById(i).appendChild(c);
     }
 }
 
 function updateCheckStates() {
     // document.getElementById("courseCheckBox").disabled = !this.checked;
     var checkboxes = document.getElementsByClass("form-check-input");
-    for (var i = 0, max = checkboxes.length(); i < max; i++) {
+    for (var i = 0, max = checkboxes.length; i < max; i++) {
 
     }
 }
