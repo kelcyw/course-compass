@@ -26,3 +26,7 @@ body {
 .title{
     font-size: x-large;
 }
+
+div.card.text-white.bg-secon {
+    background-color: rgb(225, 193, 230);
+}
