@@ -1,15 +1,22 @@
 body {
-    background-color: rgb(177, 217, 203);
+    background-color: rgb(255, 253, 243);
 }
 
 .button{
-    background-color: rgb(180, 137, 219);
+    background-color: rgb(225, 193, 230);
 }
 
 .card{
     margin-bottom: 30px;
     margin-left: 30px;
+}
 
+.container-fluid{
+    background-color: rgb(255, 253, 243);
+}
+
+.card {
+    background-color: rgb(255, 253, 243);
 }
 .card-body {
     font-size: x-large;
