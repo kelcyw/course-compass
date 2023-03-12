@@ -10,6 +10,29 @@ class Course {
         this.courseCode = courseCode;
         this.credits = credits;
     }
+
+    get getPrereqs() {
+        return this.prereqs;
+    }
+
+    get getCourseName() {
+        return this.courseName;
+    }
+
+    get getCourseCode() {
+        return this.courseCode;
+    }
+
+    hasPrereq(course) {
+        this.prereqs.forEach((prereq) => {
+            prereq.forEach((c) => {
+                if (c == course) {
+                    return true;
+                }
+            })
+        })
+        return false;
+    }
 }
 
 var student = {
