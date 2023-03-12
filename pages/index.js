@@ -1,4 +1,9 @@
 class Course {
+    prereqs;
+    courseName;
+    courseCode;
+    credits;
+
     Class(prereqs, courseName, courseCode, credits) {
         this.prereqs = prereqs;
         this.courseName = courseName;
@@ -7,14 +12,18 @@ class Course {
     }
 }
 
-
 var student = {
     name:"John", 
     id:"555666777", 
     takenCourses:[], 
     degree:{
         name:"B.Sc, Computer Science", 
-        requirements:[]
+        requirements:[
+            new Course([], "CPSC", 100, 3), 
+            new Course([], "CPSC", 103, 3), 
+            new Course([new Course([], "CPSC", 103, 3)], "CPSC", 107, 3), 
+            new Course([], "CPSC", 110, 4)
+        ]
     }
 }
 
@@ -29,6 +38,12 @@ function load() {
 function addCourse() {
     student.takenCourses.push("CPSC 110");
     load();
+}
+
+function loadMap() {
+    for (var i = 0, max = student.degree.requirements.length(); i < max; i++) {
+        document.createElement();
+    }
 }
 
 function updateCheckStates() {
