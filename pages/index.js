@@ -107,13 +107,12 @@ let requirements = [
 let cs_degree = new Degree("CPSC", requirements);
 
 
-
 function filterCoursesByName(name) {
     let filtered = [];
 
-    // not sure if I implemented this correctly
+    
     cs_degree.requirements.forEach((list) => {
-        list.item.forEach((course) => {
+        list.forEach((course) => {
             if (!filtered.contains(course) && course.getCourseName()) {
                 filtered.add(course);
             }
@@ -173,14 +172,13 @@ class Student {
         let requirements = this.#degree.getRequirements();
         let unfulfilled = [];
 
-        requirements.forEach(function(path, index) {
+        requirements.forEach((path) => {
             let path_list = [];
             path.forEach((course) => {
                 if (!this.#finishedcourses.contains(course)) {
                     path_list.add(course);
                 }
             })
-            a
             unfulfilled.add(path_list);
         })
         return unfulfilled;
@@ -190,13 +188,14 @@ class Student {
         let requirements = this.#degree.getRequirements();
         let available = [];
 
-        requirements.forEach(function(path, index) {
+        requirements.forEach((path) => {
             for (var i = 0; i < path.length; i++) {
                 let course = path[i];
 
                 if (this.#finishedCourses.contains(course)) {
                     continue;
                 }
+                
                 this.#finishedCourses.forEach((finished) => {
                     if (course.hasPreq(finished) && !available.contains(c)) {
                         available.add(course);
@@ -204,6 +203,7 @@ class Student {
                 })
             }
         })
+
         return available;
     }
 }
