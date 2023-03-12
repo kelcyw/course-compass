@@ -51,7 +51,7 @@ function filterCoursesByName(name) {
 
     cs_degree.requirements.forEach((list) => {
         list.item.forEach((course) => {
-            if (!filtered.contains(course) && course.getCourseName) {
+            if (!filtered.includes(course) && course.getCourseName) {
                 filtered.add(course);
             }
         })
@@ -90,13 +90,13 @@ class Student {
     }
 
     addTakenCourse(course) {
-        if (!this.finishedCourses.contains(course)) {
+        if (!this.finishedCourses.includes(course)) {
             this.finishedCourses.add(course);
         }
     }
 
     removeTakenCourse(course) {
-        if (this.finishedCourses.contains(course)) {
+        if (this.finishedCourses.includes(course)) {
             this.finishedCourses.remove(course);
         }
     }
@@ -108,7 +108,7 @@ class Student {
         requirements.forEach((path) => {
             let path_list = [];
             path.forEach((course) => {
-                if (!this.finishedcourses.contains(course)) {
+                if (!this.finishedcourses.includes(course)) {
                     path_list.add(course);
                 }
             })
@@ -125,11 +125,11 @@ class Student {
             for (var i = 0; i < path.length; i++) {
                 let course = path[i];
 
-                if (this.finishedCourses.contains(course)) {
+                if (this.finishedCourses.includes(course)) {
                     continue;
                 }
                 this.finishedCourses.forEach((finished) => {
-                    if (course.hasPreq(finished) && !available.contains(c)) {
+                    if (course.hasPreq(finished) && !available.includes(c)) {
                         available.add(course);
                     }
                 })
